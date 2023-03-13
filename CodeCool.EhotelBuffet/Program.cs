@@ -1,11 +1,12 @@
-﻿using CodeCool.EhotelBuffet.Buffet.Service;
+﻿using System.Threading.Channels;
+using CodeCool.EhotelBuffet.Buffet.Service;
 using CodeCool.EhotelBuffet.Guests.Service;
 using CodeCool.EhotelBuffet.Menu.Service;
 using CodeCool.EhotelBuffet.Refill.Service;
 using CodeCool.EhotelBuffet.Reservations.Service;
 using CodeCool.EhotelBuffet.Simulator.Service;
 using CodeCool.EhotelBuffet.Ui;
-
+/*
 ITimeService timeService = new TimeService();
 IMenuProvider menuProvider = new MenuProvider();
 IRefillService refillService = null;
@@ -19,4 +20,11 @@ IDiningSimulator diningSimulator =
 
 EhoteBuffetUi ui = new EhoteBuffetUi(reservationProvider, reservationManager, diningSimulator);
 
-ui.Run();
+ui.Run();*/
+
+using CodeCool.EhotelBuffet.Guests.Model;
+using CodeCool.EhotelBuffet.Guests.Service;
+
+RandomGuestGenerator randomGuestGenerator = new RandomGuestGenerator();
+
+IEnumerable<Guest> guests = randomGuestGenerator.Provide(1);
