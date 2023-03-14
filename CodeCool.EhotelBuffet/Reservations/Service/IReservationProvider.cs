@@ -6,4 +6,6 @@ namespace CodeCool.EhotelBuffet.Reservations.Service;
 public interface IReservationProvider
 {
     Reservation Provide(Guest guest, DateTime seasonStart, DateTime seasonEnd);
+    
+    
 }
