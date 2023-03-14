@@ -21,10 +21,20 @@ IDiningSimulator diningSimulator =
 EhoteBuffetUi ui = new EhoteBuffetUi(reservationProvider, reservationManager, diningSimulator);
 
 ui.Run();*/
-
 using CodeCool.EhotelBuffet.Guests.Model;
 using CodeCool.EhotelBuffet.Guests.Service;
 
 RandomGuestGenerator randomGuestGenerator = new RandomGuestGenerator();
 
-IEnumerable<Guest> guests = randomGuestGenerator.Provide(1);
+IEnumerable<Guest> guests = randomGuestGenerator.Provide(10);
+
+GuestGroupProvider guestGroupProvider = new GuestGroupProvider();
+IEnumerable<GuestGroup> guestGroups = guestGroupProvider.SplitGuestsIntoGroups(guests, 5, 3);
+
+foreach (var guestGroup in guestGroups.ToArray())
+{
+    List<Guest> guestsInGroup = guestGroup.Guests.ToList();
+    Console.WriteLine("Group: ");
+    Console.WriteLine(guestGroup.Id);
+    Console.WriteLine(String.Join(",",guestsInGroup));
+}
