@@ -1,0 +1,15 @@
+/home/maria/CodeCool/ehotel-buffet-csharp-Maria-Sima/CodeCool.EhotelBuffet/bin/Debug/net6.0/CodeCool.EhotelBuffet
+/home/maria/CodeCool/ehotel-buffet-csharp-Maria-Sima/CodeCool.EhotelBuffet/bin/Debug/net6.0/CodeCool.EhotelBuffet.deps.json
+/home/maria/CodeCool/ehotel-buffet-csharp-Maria-Sima/CodeCool.EhotelBuffet/bin/Debug/net6.0/CodeCool.EhotelBuffet.runtimeconfig.json
+/home/maria/CodeCool/ehotel-buffet-csharp-Maria-Sima/CodeCool.EhotelBuffet/bin/Debug/net6.0/CodeCool.EhotelBuffet.dll
+/home/maria/CodeCool/ehotel-buffet-csharp-Maria-Sima/CodeCool.EhotelBuffet/bin/Debug/net6.0/CodeCool.EhotelBuffet.pdb
+/home/maria/CodeCool/ehotel-buffet-csharp-Maria-Sima/CodeCool.EhotelBuffet/obj/Debug/net6.0/CodeCool.EhotelBuffet.csproj.AssemblyReference.cache
+/home/maria/CodeCool/ehotel-buffet-csharp-Maria-Sima/CodeCool.EhotelBuffet/obj/Debug/net6.0/CodeCool.EhotelBuffet.GeneratedMSBuildEditorConfig.editorconfig
+/home/maria/CodeCool/ehotel-buffet-csharp-Maria-Sima/CodeCool.EhotelBuffet/obj/Debug/net6.0/CodeCool.EhotelBuffet.AssemblyInfoInputs.cache
+/home/maria/CodeCool/ehotel-buffet-csharp-Maria-Sima/CodeCool.EhotelBuffet/obj/Debug/net6.0/CodeCool.EhotelBuffet.AssemblyInfo.cs
+/home/maria/CodeCool/ehotel-buffet-csharp-Maria-Sima/CodeCool.EhotelBuffet/obj/Debug/net6.0/CodeCool.EhotelBuffet.csproj.CoreCompileInputs.cache
+/home/maria/CodeCool/ehotel-buffet-csharp-Maria-Sima/CodeCool.EhotelBuffet/obj/Debug/net6.0/CodeCool.EhotelBuffet.dll
+/home/maria/CodeCool/ehotel-buffet-csharp-Maria-Sima/CodeCool.EhotelBuffet/obj/Debug/net6.0/refint/CodeCool.EhotelBuffet.dll
+/home/maria/CodeCool/ehotel-buffet-csharp-Maria-Sima/CodeCool.EhotelBuffet/obj/Debug/net6.0/CodeCool.EhotelBuffet.pdb
+/home/maria/CodeCool/ehotel-buffet-csharp-Maria-Sima/CodeCool.EhotelBuffet/obj/Debug/net6.0/CodeCool.EhotelBuffet.genruntimeconfig.cache
+/home/maria/CodeCool/ehotel-buffet-csharp-Maria-Sima/CodeCool.EhotelBuffet/obj/Debug/net6.0/ref/CodeCool.EhotelBuffet.dll
