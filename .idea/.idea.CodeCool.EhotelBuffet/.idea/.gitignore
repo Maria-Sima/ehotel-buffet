@@ -4,6 +4,8 @@
 # Rider ignored files
 /.idea.CodeCool.EhotelBuffet.iml
 /modules.xml
+/contentModel.xml
+/projectSettingsUpdater.xml
 /projectSettingsUpdater.xml
 /contentModel.xml
 # Editor-based HTTP Client requests
