@@ -1,35 +1,33 @@
-using System.Collections.Generic;
 using CodeCool.EhotelBuffet.Guests.Model;
 using CodeCool.EhotelBuffet.Reservations.Model;
 
-namespace CodeCool.EhotelBuffet.Reservations.Service
+namespace CodeCool.EhotelBuffet.Reservations.Service;
+
+public class ReservationManager:IReservationManager
 {
-    public class ReservationManager : IReservationManager
+    private List<Reservation> _reservations;
+    
+    public void AddReservation(Reservation reservation)
     {
-        private List<Reservation> _reservations = new List<Reservation>();
+        _reservations.Add(reservation);
+    }
 
-        public void AddReservation(Reservation reservation)
+    public IEnumerable<Guest> GetGuestsForDate(DateTime date)
+    {
+        List<Guest> PresentGuests = new List<Guest>();
+        foreach (var reservation in _reservations)
         {
-            _reservations.Add(reservation);
-        }
-
-        public IEnumerable<Guest> GetGuestsForDate(DateTime date)
-        {
-            List<Guest> occupiedGuests = new List<Guest>();
-            foreach (var reservation in _reservations)
+            if (reservation.Start >= date && reservation.End <= date )
             {
-                if (reservation.Start <= date && reservation.End >= date)
-                {
-                    occupiedGuests.Add(reservation.Guest);
-                }
+                PresentGuests.Add(reservation.Guest);
             }
-
-            return occupiedGuests;
         }
 
-        public IEnumerable<Reservation> GetAll()
-        {
-            return _reservations;
-        }
+        return PresentGuests;
+    }
+
+    public IEnumerable<Reservation> GetAll()
+    {
+        return _reservations;
     }
 }
