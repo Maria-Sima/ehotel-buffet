@@ -2,4 +2,7 @@
 
 namespace CodeCool.EhotelBuffet.Guests.Service;
 
-
+public interface IGuestProvider
+{
+    
+}

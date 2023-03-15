@@ -2,8 +2,4 @@
 
 public record Portion(MenuItem MenuItem, DateTime TimeStamp)
 {
-    public Portion() 
-    {
-        throw new NotImplementedException();
-    }
 }

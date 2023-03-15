@@ -20,6 +20,7 @@ public class BuffetService : IBuffetService
 
     public void Refill(IRefillStrategy refillStrategy)
     {
+        DateTime dateTime = DateTime.Now;
         if (!_isInitialized)
         {
             var initialQuantities = refillStrategy.GetInitialQuantities(_menuProvider.MenuItems);
@@ -28,7 +29,7 @@ public class BuffetService : IBuffetService
             {
                 for (int i = 0; i < quantity.Value; i++)
                 {
-                    var portion = new Portion { MenuItem = quantity.Key };
+                    var portion = new Portion(quantity.Key, dateTime);
                     _currentPortions.Add(portion);
                 }
             }
@@ -43,7 +44,7 @@ public class BuffetService : IBuffetService
             {
                 for (int i = 0; i < quantity.Value; i++)
                 {
-                    var portion = new Portion { MenuItem = quantity.Key };
+                    var portion = new Portion(quantity.Key, dateTime);
                     _currentPortions.Add(portion);
                 }
             }

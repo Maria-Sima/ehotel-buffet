@@ -1,4 +1,5 @@
-﻿using CodeCool.EhotelBuffet.Buffet.Service;
+﻿using System.Runtime.Serialization;
+using CodeCool.EhotelBuffet.Buffet.Service;
 using CodeCool.EhotelBuffet.Guests.Model;
 using CodeCool.EhotelBuffet.Guests.Service;
 using CodeCool.EhotelBuffet.Menu.Model;
@@ -36,6 +37,20 @@ public class BreakfastSimulator : IDiningSimulator
 
     public DiningSimulationResults Run(DiningSimulatorConfig config)
     {
+        ResetState();
+        DateTime currentTime = config.Start;
+        List<Guest> guestsToday = _reservationManager.GetGuestsForDate(currentTime).ToList();
+        int maxGuestsPerGroup = guestsToday.Count / config.MinimumGroupCount;
+        IRefillStrategy refillStrategy = new BasicRefillStrategy();
+
+        for (int i = 0; i < config.Cycles; i++)
+        {
+            _buffetService.Refill(refillStrategy);
+            for (int j = 0; j < guestsToday.Count(); j++)
+            {
+            }
+        }
+        
         return null;
     }
 
