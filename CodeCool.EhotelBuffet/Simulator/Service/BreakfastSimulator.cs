@@ -36,7 +36,36 @@ public class BreakfastSimulator : IDiningSimulator
 
     public DiningSimulationResults Run(DiningSimulatorConfig config)
     {
-        return null;
+        var currentTime = config.Start;
+            
+        List<Guest> guests = _reservationManager.GetGuestsForDate(config.Start).ToList();
+            
+        var maxGuestsPerGroup = guests.Count / config.MinimumGroupCount;
+            
+        var refillStrategy = new BasicRefillStrategy();
+
+        for (int i = 0; i < config.Cycles; i++)
+        {
+            _buffetService.Refill(refillStrategy);
+
+            for (int j = 0; j < guests.Count; j += maxGuestsPerGroup)
+            {
+                var group = guests.GetRange(j, Math.Min(maxGuestsPerGroup, guests.Count - j));
+                
+                
+            }
+
+
+
+            var results = new DiningSimulationResults(
+            Date: config.Start,
+            TotalGuests: guests.Count,
+            FoodWasteCost: _foodWasteCost,
+            HappyGuests: _happyGuests,
+            UnhappyGuests: _unhappyGuests
+        );
+
+        return results;
     }
 
     private void ResetState()

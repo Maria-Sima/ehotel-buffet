@@ -2,7 +2,7 @@
 
 namespace CodeCool.EhotelBuffet.Guests.Service;
 
-public class RandomGuestGenerator
+public class RandomGuestGenerator:IGuestProvider
 {
     private static readonly Random Random = new Random();
 
@@ -14,7 +14,7 @@ public class RandomGuestGenerator
         "Rupert", "Hugh", "Finley", "Ralph", "Lewis", "Wilbur", "Alfie", "Ernest", "Chester", "Ziggy"
     };
 
-    public IEnumerable<Guest> Provide(int quantity)
+    public override IEnumerable<Guest> Provide(int quantity)
     {
         for (int i = 0; i < quantity; i++)
         {
