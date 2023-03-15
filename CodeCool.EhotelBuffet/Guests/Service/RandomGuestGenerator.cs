@@ -14,7 +14,7 @@ public class RandomGuestGenerator:IGuestProvider
         "Rupert", "Hugh", "Finley", "Ralph", "Lewis", "Wilbur", "Alfie", "Ernest", "Chester", "Ziggy"
     };
 
-    public override IEnumerable<Guest> Provide(int quantity)
+    public IEnumerable<Guest> Provide(int quantity)
     {
         for (int i = 0; i < quantity; i++)
         {

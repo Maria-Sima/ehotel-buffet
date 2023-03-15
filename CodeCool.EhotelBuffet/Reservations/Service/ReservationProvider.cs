@@ -9,7 +9,7 @@ public class ReservationProvider:IReservationProvider
 
     public Reservation Provide(Guest guest, DateTime seasonStart, DateTime seasonEnd)
     {
-        int numberOfDaysInSeason = (seasonEnd - seasonStart).Days;
+        int numberOfDaysInSeason = seasonEnd.Day - seasonStart.Day;
         int lengthOfStay = _random.Next(1, numberOfDaysInSeason);
         
         int maxStartDateOffset = numberOfDaysInSeason - lengthOfStay;

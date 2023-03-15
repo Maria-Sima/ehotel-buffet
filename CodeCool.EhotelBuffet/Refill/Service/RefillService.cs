@@ -13,11 +13,10 @@ public class RefillService:IRefillService
             var numPortions = kvp.Value;
             for (int i = 0; i < numPortions; i++)
             {
-                Portion newPortion = new Portion { MenuItem = menuItem };
+                Portion newPortion = new Portion (menuItem,DateTime.Now);
                 result.Add(newPortion);
             }
         }
         return result;
     }
     }
-}

@@ -2,7 +2,7 @@
 
 namespace CodeCool.EhotelBuffet.Guests.Service;
 
-public abstract class IGuestProvider
+public interface IGuestProvider
 {
-    public abstract IEnumerable<Guest> Provide(int quantity);
+    public  IEnumerable<Guest> Provide(int quantity);
 }

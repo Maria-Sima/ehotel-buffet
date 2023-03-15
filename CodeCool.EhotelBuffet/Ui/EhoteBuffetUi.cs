@@ -30,9 +30,9 @@ public class EhoteBuffetUi
         DateTime seasonEnd = DateTime.Today.AddDays(3);
 
         var guests = GetGuests(guestCount);
-        CreateReservations(guests, seasonStart, seasonEnd);
-
-        PrintGuestsWithReservations();
+        // CreateReservations(guests, seasonStart, seasonEnd);
+        //
+        // PrintGuestsWithReservations();
 
         var currentDate = seasonStart;
 
@@ -54,20 +54,41 @@ public class EhoteBuffetUi
 
     private IEnumerable<Guest> GetGuests( int num)
     {
-        var guests = new IGuestProvider();
+        var guests = new RandomGuestGenerator();
         return guests.Provide(num);
     }
 
     private void CreateReservations(IEnumerable<Guest> guests, DateTime seasonStart, DateTime seasonEnd)
     {
+        foreach (var guest in guests)
+        {
+            var reservation = _reservationProvider.Provide(guest, seasonStart, seasonEnd);
+            _reservationManager.AddReservation(reservation);
+        }
     }
 
     private void PrintGuestsWithReservations()
     {
+        Console.WriteLine("Guests with reservations:");
+
+        var reservations = _reservationManager.GetAll();
+
+        foreach (var reservation in reservations)
+        {
+            Console.WriteLine($"- {reservation.Guest.Name}, {reservation.Guest}, {reservation.Start} - {reservation.End}");
+        }
+
+        Console.WriteLine();
     }
 
     private static void PrintSimulationResults(DiningSimulationResults results)
     {
+        Console.WriteLine($"Simulation results for {results.Date.ToShortDateString()}");
+        Console.WriteLine($"Total guests: {results.TotalGuests}");
+        Console.WriteLine($"Happy guests: {results.HappyGuests.Count()}");
+        Console.WriteLine($"Unhappy guests: {results.UnhappyGuests.Count()}");
+        Console.WriteLine($"Food waste cost: {results.FoodWasteCost}");
+        Console.WriteLine();
         
     }
 }

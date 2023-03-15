@@ -28,7 +28,7 @@ public class BuffetService : IBuffetService
             {
                 for (int i = 0; i < quantity.Value; i++)
                 {
-                    var portion = new Portion { MenuItem = quantity.Key };
+                    var portion = new Portion (quantity.Key,DateTime.Now);
                     _currentPortions.Add(portion);
                 }
             }
@@ -43,7 +43,7 @@ public class BuffetService : IBuffetService
             {
                 for (int i = 0; i < quantity.Value; i++)
                 {
-                    var portion = new Portion { MenuItem = quantity.Key };
+                    var portion = new Portion(quantity.Key,DateTime.Now);
                     _currentPortions.Add(portion);
                 }
             }
