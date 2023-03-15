@@ -8,19 +8,19 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\stefa\\.nuget\\packages\\": {}
+    "/home/maria/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Projects\\OOP Module\\Week 2\\ehotel-buffet-csharp-Maria-Sima\\CodeCool.EhotelBuffet\\CodeCool.EhotelBuffet.csproj",
+      "projectUniqueName": "/home/maria/CodeCool/ehotel-buffet-csharp-Maria-Sima/CodeCool.EhotelBuffet/CodeCool.EhotelBuffet.csproj",
       "projectName": "CodeCool.EhotelBuffet",
-      "projectPath": "C:\\Projects\\OOP Module\\Week 2\\ehotel-buffet-csharp-Maria-Sima\\CodeCool.EhotelBuffet\\CodeCool.EhotelBuffet.csproj",
-      "packagesPath": "C:\\Users\\stefa\\.nuget\\packages\\",
-      "outputPath": "C:\\Projects\\OOP Module\\Week 2\\ehotel-buffet-csharp-Maria-Sima\\CodeCool.EhotelBuffet\\obj\\",
+      "projectPath": "/home/maria/CodeCool/ehotel-buffet-csharp-Maria-Sima/CodeCool.EhotelBuffet/CodeCool.EhotelBuffet.csproj",
+      "packagesPath": "/home/maria/.nuget/packages/",
+      "outputPath": "/home/maria/CodeCool/ehotel-buffet-csharp-Maria-Sima/CodeCool.EhotelBuffet/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\stefa\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/home/maria/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
@@ -59,7 +59,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/home/maria/.dotnet/sdk/7.0.200/RuntimeIdentifierGraph.json"
       }
     }
   }
