@@ -3,6 +3,7 @@ using CodeCool.EhotelBuffet.Guests.Model;
 using CodeCool.EhotelBuffet.Guests.Service;
 using CodeCool.EhotelBuffet.Menu.Service;
 using CodeCool.EhotelBuffet.Refill.Service;
+using CodeCool.EhotelBuffet.Reservations.Model;
 using CodeCool.EhotelBuffet.Reservations.Service;
 using CodeCool.EhotelBuffet.Simulator.Service;
 using CodeCool.EhotelBuffet.Ui;
@@ -27,11 +28,15 @@ GuestGroupProvider guestGroupProvider = new GuestGroupProvider();
 
 
 IEnumerable<GuestGroup> guestGroups=guestGroupProvider.SplitGuestsIntoGroups(randomGuestGenerator.Provide(20), 5, 4);
+IReservationProvider reservationProvider = new ReservationProvider();
+DateTime date1 = new DateTime(2015, 12, 25); 
+DateTime date2 = new DateTime(2015, 12, 11); 
 
-foreach (var guestgroup in guestGroups)
-{
-    foreach (var guest in guestgroup.Guests)
-    {
-        Console.WriteLine(guest); 
-    }
-}
+// foreach (var guestgroup in guestGroups)
+// {
+//     foreach (var guest in guestgroup.Guests)
+//     {
+//         Console.WriteLine(reservationProvider.Provide(guest, date2, date1));
+//         
+//     }
+// }

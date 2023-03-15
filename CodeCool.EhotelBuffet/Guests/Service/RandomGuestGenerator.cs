@@ -18,7 +18,7 @@ public class RandomGuestGenerator
     {
         for (int i = 0; i < quantity; i++)
         {
-            Console.WriteLine(1);
+            
             yield return GenerateRandomGuest();
         }
     }
