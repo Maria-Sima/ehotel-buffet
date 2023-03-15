@@ -4,6 +4,7 @@ using CodeCool.EhotelBuffet.Guests.Service;
 using CodeCool.EhotelBuffet.Menu.Service;
 using CodeCool.EhotelBuffet.Refill.Service;
 using CodeCool.EhotelBuffet.Reservations.Service;
+using CodeCool.EhotelBuffet.Simulator.Model;
 using CodeCool.EhotelBuffet.Simulator.Service;
 using CodeCool.EhotelBuffet.Ui;
 
@@ -26,12 +27,4 @@ RandomGuestGenerator randomGuestGenerator = new RandomGuestGenerator();
 GuestGroupProvider guestGroupProvider = new GuestGroupProvider();
 
 
-IEnumerable<GuestGroup> guestGroups=guestGroupProvider.SplitGuestsIntoGroups(randomGuestGenerator.Provide(20), 5, 4);
-
-foreach (var guestgroup in guestGroups)
-{
-    foreach (var guest in guestgroup.Guests)
-    {
-        Console.WriteLine(guest); 
-    }
-}
+IEnumerable<GuestGroup> guestGroups = guestGroupProvider.SplitGuestsIntoGroups(randomGuestGenerator.Provide(20), 5, 4);

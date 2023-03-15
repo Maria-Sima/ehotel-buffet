@@ -4,5 +4,7 @@
     &lt;TestId&gt;NUnit3x::A2CEDA86-27C7-4D57-96BE-3625B2DFF6C9::net6.0::CodeCool.EhotelBuffetTest.Tests.RandomGuestProviderProvides&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::A2CEDA86-27C7-4D57-96BE-3625B2DFF6C9::net6.0::CodeCool.EhotelBuffetTest.Tests.GuestGroupProviderProvides&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::A2CEDA86-27C7-4D57-96BE-3625B2DFF6C9::net6.0::CodeCool.EhotelBuffetTest.Tests.RandomGuestProviderRandomName&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::A2CEDA86-27C7-4D57-96BE-3625B2DFF6C9::net6.0::CodeCool.EhotelBuffetTest.ReservationsTest.AddReservation&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::A2CEDA86-27C7-4D57-96BE-3625B2DFF6C9::net6.0::CodeCool.EhotelBuffetTest.ReservationsTest.GetGuestsForDate&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
