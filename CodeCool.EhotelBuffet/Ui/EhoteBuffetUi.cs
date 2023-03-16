@@ -47,8 +47,7 @@ public class EhoteBuffetUi
             var results = _diningSimulator.Run(simulatorConfig);
             PrintSimulationResults(results);
             currentDate = currentDate.AddDays(1);
-        }
-
+        } ;
         Console.ReadLine();
     }
 
@@ -71,11 +70,19 @@ public class EhoteBuffetUi
     private void PrintGuestsWithReservations()
     {
         var guestsWithRezervation = _reservationManager.GetAll();
-        Console.WriteLine(guestsWithRezervation);
+        foreach (var guest in guestsWithRezervation)
+        {
+            Console.WriteLine(guest.Guest);
+        }
     }
 
     private static void PrintSimulationResults(DiningSimulationResults results)
     {
-        Console.WriteLine(results);
+        Console.WriteLine($"Simulation results for {results.Date}");
+        Console.WriteLine($"Total guests: {results.TotalGuests}");
+        Console.WriteLine($"Happy guests: {results.HappyGuests.Count()}");
+        Console.WriteLine($"Unhappy guests: {results.UnhappyGuests}");
+        Console.WriteLine($"Food waste cost: {results.FoodWasteCost}");
+        Console.WriteLine();
     }
 }

@@ -11,10 +11,10 @@ using CodeCool.EhotelBuffet.Ui;
 
 ITimeService timeService = new TimeService();
 IMenuProvider menuProvider = new MenuProvider();
-IRefillService refillService = null;
-IGuestGroupProvider guestGroupProvider = null;
-IReservationProvider reservationProvider = null;
-IReservationManager reservationManager = null;
+IRefillService refillService = new RefillService();
+IGuestGroupProvider guestGroupProvider = new GuestGroupProvider();
+IReservationProvider reservationProvider = new ReservationProvider();
+IReservationManager reservationManager = new ReservationManager();
 
 IBuffetService buffetService = new BuffetService(menuProvider, refillService);
 IDiningSimulator diningSimulator =

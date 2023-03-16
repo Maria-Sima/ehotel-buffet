@@ -13,7 +13,7 @@ public class ReservationProvider:IReservationProvider
         int lengthOfStay = _random.Next(1, numberOfDaysInSeason);
         
         int maxStartDateOffset = numberOfDaysInSeason - lengthOfStay;
-        DateTime   startDate = seasonStart.AddDays(_random.Next(0, maxStartDateOffset));
+        DateTime  startDate = seasonStart.AddDays(_random.Next(0, maxStartDateOffset));
         DateTime endDate = startDate.AddDays(lengthOfStay);
 
         return new Reservation(startDate, endDate, guest);

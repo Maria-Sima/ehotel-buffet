@@ -19,7 +19,7 @@ public class BreakfastSimulator : IDiningSimulator
     private readonly ITimeService _timeService;
 
     private readonly List<Guest> _happyGuests = new();
-    private readonly List<Guest> _unhappyGuests = new();
+    private int _unhappyGuests;
 
     private int _foodWasteCost;
 
@@ -38,7 +38,7 @@ public class BreakfastSimulator : IDiningSimulator
     public DiningSimulationResults Run(DiningSimulatorConfig config)
     {
         ResetState();
-        DateTime currentTime = config.Start;
+        DateTime currentTime = _timeService.SetCurrentTime(config.Start);
         List<Guest> guestsToday = _reservationManager.GetGuestsForDate(currentTime).ToList();
         int maxGuestsPerGroup = guestsToday.Count / config.MinimumGroupCount;
         IRefillStrategy refillStrategy = new BasicRefillStrategy();
@@ -47,21 +47,27 @@ public class BreakfastSimulator : IDiningSimulator
         for (int i = 0; i < config.Cycles; i++)
         {
             _buffetService.Refill(refillStrategy);
-            IEnumerator<Guest> guestsPergroup = groups[i].Guests.GetEnumerator();
-            var meals = guestsPergroup.Current.MealPreferences;
-            foreach (var meal in meals)
+            if (i <= groups.Count - 1) 
             {
-                if (_buffetService.Consume(meal) == false)
+                List<Guest> guestsPergroup = groups[i].Guests.ToList();
+                
+                foreach (var guest in guestsPergroup)
                 {
-                    _unhappyGuests.Add(guestsPergroup.Current);
+                    var meals = guest.MealPreferences;
+                    foreach (var meal in meals)
+                    {
+                        if (_buffetService.Consume(meal))
+                        {
+                            _happyGuests.Add(guest);
+                            break;
+                        }
+                    }
                 }
-                else
-                {
-                    _happyGuests.Add(guestsPergroup.Current);
-                }
+
+                _unhappyGuests = guestsToday.Count - _happyGuests.Count;
             }
 
-            currentTime = _timeService.IncreaseCurrentTime(30);
+            currentTime = _timeService.IncreaseCurrentTime(config.CycleLengthInMinutes);
 
             _foodWasteCost = _buffetService.CollectWaste(MealDurability.Short, currentTime);
 
@@ -69,14 +75,15 @@ public class BreakfastSimulator : IDiningSimulator
 
         var result = new DiningSimulationResults(currentTime, guestsToday.Count, _foodWasteCost, _happyGuests,
             _unhappyGuests);
-        return  result;
+        
+        return result;
     }
 
     private void ResetState()
     {
         _foodWasteCost = 0;
         _happyGuests.Clear();
-        _unhappyGuests.Clear();
+        _unhappyGuests = 0;
         _buffetService.Reset();
     }
 }
