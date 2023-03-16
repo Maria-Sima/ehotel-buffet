@@ -1,8 +1,8 @@
-﻿using CodeCool.EhotelBuffet.Buffet.Service;
+﻿using System.Runtime.Serialization;
+using CodeCool.EhotelBuffet.Buffet.Service;
 using CodeCool.EhotelBuffet.Guests.Model;
 using CodeCool.EhotelBuffet.Guests.Service;
 using CodeCool.EhotelBuffet.Menu.Model;
-using CodeCool.EhotelBuffet.Menu.Service;
 using CodeCool.EhotelBuffet.Refill.Service;
 using CodeCool.EhotelBuffet.Reservations.Service;
 using CodeCool.EhotelBuffet.Simulator.Model;
@@ -19,7 +19,7 @@ public class BreakfastSimulator : IDiningSimulator
     private readonly ITimeService _timeService;
 
     private readonly List<Guest> _happyGuests = new();
-    private readonly List<Guest> _unhappyGuests = new();
+    private int _unhappyGuests;
 
     private int _foodWasteCost;
 
@@ -37,73 +37,53 @@ public class BreakfastSimulator : IDiningSimulator
 
     public DiningSimulationResults Run(DiningSimulatorConfig config)
     {
-          var currentTime = config.Start;
+        ResetState();
+        DateTime currentTime = _timeService.SetCurrentTime(config.Start);
+        List<Guest> guestsToday = _reservationManager.GetGuestsForDate(currentTime).ToList();
+        int maxGuestsPerGroup = guestsToday.Count / config.MinimumGroupCount;
+        IRefillStrategy refillStrategy = new BasicRefillStrategy();
+        List<GuestGroup> groups = _guestGroupProvider.SplitGuestsIntoGroups(guestsToday, config.MinimumGroupCount ,maxGuestsPerGroup).ToList();
 
-            List<Guest> guests = _reservationManager.GetGuestsForDate(config.Start).ToList();
-
-            var maxGuestsPerGroup = guests.Count / config.MinimumGroupCount;
-
-            var refillStrategy = new BasicRefillStrategy();
-
-            for (int i = 0; i < config.Cycles; i++)
+        for (int i = 0; i < config.Cycles; i++)
+        {
+            _buffetService.Refill(refillStrategy);
+            if (i <= groups.Count - 1) 
             {
-                _buffetService.Refill(refillStrategy);
-
-                for (int j = 0; j < guests.Count; j += maxGuestsPerGroup)
+                List<Guest> guestsPergroup = groups[i].Guests.ToList();
+                
+                foreach (var guest in guestsPergroup)
                 {
-                    IMenuProvider menuProvider = new MenuProvider();
-                    var group = guests.GetRange(j, Math.Min(maxGuestsPerGroup, guests.Count - j));
-                    var availableFood = menuProvider.MenuItems.ToList();
-
-                    bool allGuestsSatisfied = true;
-
-                    foreach (var guest in group)
+                    var meals = guest.MealPreferences;
+                    foreach (var meal in meals)
                     {
-                        var selectedFood = availableFood.Where(item => guest.MealPreferences.Contains(item.MealType)).ToList();
-
-                        if (selectedFood.Count == 0)
+                        if (_buffetService.Consume(meal))
                         {
-                            _unhappyGuests.Add(guest);
-                            allGuestsSatisfied = false;
-                        }
-                        else
-                        {
-                            var chosenFood = selectedFood.ElementAt(Random.Next(0, selectedFood.Count));
-                            if (!_buffetService.Consume(chosenFood.MealType))
-                            {
-                                throw new InvalidOperationException("Chosen food could not be consumed.");
-                            }
-                           
                             _happyGuests.Add(guest);
+                            break;
                         }
-                    }
-
-                    if (!allGuestsSatisfied)
-                    {
-                        _foodWasteCost += _buffetService.CollectWaste(MealDurability.Short, config.Start);
                     }
                 }
+
+                _unhappyGuests = guestsToday.Count - _happyGuests.Count;
             }
 
-            var results = new DiningSimulationResults(
-                Date: config.Start,
-                TotalGuests: guests.Count,
-                FoodWasteCost: _foodWasteCost,
-                HappyGuests: _happyGuests,
-                UnhappyGuests: _unhappyGuests
-            );
+            currentTime = _timeService.IncreaseCurrentTime(config.CycleLengthInMinutes);
 
-            ResetState();
+            _foodWasteCost = _buffetService.CollectWaste(MealDurability.Short, currentTime);
 
-            return results;
+        }
+
+        var result = new DiningSimulationResults(currentTime, guestsToday.Count, _foodWasteCost, _happyGuests,
+            _unhappyGuests);
         
+        return result;
     }
 
     private void ResetState()
     {
         _foodWasteCost = 0;
         _happyGuests.Clear();
-        _unhappyGuests.Clear();
+        _unhappyGuests = 0;
         _buffetService.Reset();
     }
 }

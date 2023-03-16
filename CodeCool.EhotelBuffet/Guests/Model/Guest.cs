@@ -12,15 +12,15 @@ public record Guest(string Name, GuestType GuestType)
         {
             case GuestType.Business:
             {
-                return new MealType[] { MealType.Bun};
+                return new MealType[] { MealType.ScrambledEggs, MealType.FriedBacon, MealType.Croissant};
             }
             case GuestType.Kid:
             {
-                return new MealType[] { MealType.Cereal };
+                return new MealType[] { MealType.Cereal, MealType.Pancake, MealType.Muffin, MealType.Milk };
             }
             case GuestType.Tourist:
             {
-                return new MealType[] { MealType.Croissant };
+                return new MealType[] { MealType.SunnySideUp, MealType.FriedSausage, MealType.MashedPotato, MealType.Bun, MealType.Muffin };
             }
             default:
             {

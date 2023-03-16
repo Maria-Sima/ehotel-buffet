@@ -2,7 +2,7 @@ using CodeCool.EhotelBuffet.Menu.Model;
 
 namespace CodeCool.EhotelBuffet.Refill.Service;
 
-public class RefillService:IRefillService
+public class RefillService : IRefillService
 {
     public IEnumerable<Portion> AskForRefill(Dictionary<MenuItem, int> menuItemToPortions)
     {
@@ -13,10 +13,11 @@ public class RefillService:IRefillService
             var numPortions = kvp.Value;
             for (int i = 0; i < numPortions; i++)
             {
-                Portion newPortion = new Portion (menuItem,DateTime.Now);
+                Portion newPortion = new Portion(menuItem, DateTime.Now);
                 result.Add(newPortion);
             }
         }
+
         return result;
     }
-    }
+}

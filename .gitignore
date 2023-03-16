@@ -1,0 +1,20 @@
+﻿# Rider
+.idea/
+*.sln.iml
+*.csproj.user
+
+# Build results
+bin/
+obj/
+
+# NuGet packages
+*.nupkg
+/packages/
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Logs
+*.log
+logs/

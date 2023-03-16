@@ -5,7 +5,7 @@ namespace CodeCool.EhotelBuffet.Reservations.Service;
 
 public class ReservationManager:IReservationManager
 {
-    private List<Reservation> _reservations;
+    private List<Reservation> _reservations = new List<Reservation>();
     
     public void AddReservation(Reservation reservation)
     {
@@ -17,7 +17,7 @@ public class ReservationManager:IReservationManager
         List<Guest> PresentGuests = new List<Guest>();
         foreach (var reservation in _reservations)
         {
-            if (reservation.Start >= date && reservation.End <= date )
+            if (reservation.Start <= date && reservation.End >= date )
             {
                 PresentGuests.Add(reservation.Guest);
             }

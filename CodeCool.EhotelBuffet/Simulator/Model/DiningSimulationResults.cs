@@ -7,4 +7,4 @@ public record DiningSimulationResults(
     int TotalGuests,
     int FoodWasteCost,
     IEnumerable<Guest> HappyGuests,
-    IEnumerable<Guest> UnhappyGuests);
+    int UnhappyGuests);
