@@ -29,7 +29,7 @@ public class EhoteBuffetUi
         DateTime seasonStart = DateTime.Today;
         DateTime seasonEnd = DateTime.Today.AddDays(3);
 
-        var guests = GetGuests();
+        var guests = GetGuests(guestCount);
         CreateReservations(guests, seasonStart, seasonEnd);
 
         PrintGuestsWithReservations();
@@ -52,20 +52,30 @@ public class EhoteBuffetUi
         Console.ReadLine();
     }
 
-    private IEnumerable<Guest> GetGuests()
+    private IEnumerable<Guest> GetGuests(int count)
     {
-        return null;
+        RandomGuestGenerator generate = new RandomGuestGenerator();
+        IEnumerable<Guest> generatedGuests = generate.Provide(count);
+        return generatedGuests;
     }
 
     private void CreateReservations(IEnumerable<Guest> guests, DateTime seasonStart, DateTime seasonEnd)
     {
+        foreach (var guest in guests)
+        {
+            var res = _reservationProvider.Provide(guest, seasonStart, seasonEnd);
+            _reservationManager.AddReservation(res);
+        }
     }
 
     private void PrintGuestsWithReservations()
     {
+        var guestsWithRezervation = _reservationManager.GetAll();
+        Console.WriteLine(guestsWithRezervation);
     }
 
     private static void PrintSimulationResults(DiningSimulationResults results)
     {
+        Console.WriteLine(results);
     }
 }

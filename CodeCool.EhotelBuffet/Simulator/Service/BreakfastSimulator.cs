@@ -42,16 +42,34 @@ public class BreakfastSimulator : IDiningSimulator
         List<Guest> guestsToday = _reservationManager.GetGuestsForDate(currentTime).ToList();
         int maxGuestsPerGroup = guestsToday.Count / config.MinimumGroupCount;
         IRefillStrategy refillStrategy = new BasicRefillStrategy();
+        List<GuestGroup> groups = _guestGroupProvider.SplitGuestsIntoGroups(guestsToday, config.MinimumGroupCount ,maxGuestsPerGroup).ToList();
 
         for (int i = 0; i < config.Cycles; i++)
         {
             _buffetService.Refill(refillStrategy);
-            for (int j = 0; j < guestsToday.Count(); j++)
+            IEnumerator<Guest> guestsPergroup = groups[i].Guests.GetEnumerator();
+            var meals = guestsPergroup.Current.MealPreferences;
+            foreach (var meal in meals)
             {
+                if (_buffetService.Consume(meal) == false)
+                {
+                    _unhappyGuests.Add(guestsPergroup.Current);
+                }
+                else
+                {
+                    _happyGuests.Add(guestsPergroup.Current);
+                }
             }
+
+            currentTime = _timeService.IncreaseCurrentTime(30);
+
+            _foodWasteCost = _buffetService.CollectWaste(MealDurability.Short, currentTime);
+
         }
-        
-        return null;
+
+        var result = new DiningSimulationResults(currentTime, guestsToday.Count, _foodWasteCost, _happyGuests,
+            _unhappyGuests);
+        return  result;
     }
 
     private void ResetState()
